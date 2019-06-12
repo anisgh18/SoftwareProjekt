@@ -1,0 +1,28 @@
+currentDataSet <- read.table("om1701_rttask_all.dat", header=TRUE)
+DataSetCleaned <- currentDataSet[currentDataSet$key_error=="correct",]
+DataSetCleaned <- DataSetCleaned[DataSetCleaned$time_error=="Normal",]
+count1 <- length(currentDataSet$trial_no)
+count2 <- length(which(currentDataSet$key_error == "error",))
+count3 <- length(which(currentDataSet$time_error=="Late",))
+cat("The total number of trials is: ", count1, ". The total number of error trials is: ", count2, ". The total number of time latencies is : ", count3)
+p100 <- DataSetCleaned[DataSetCleaned$sub == "100",]
+p101 <- DataSetCleaned[DataSetCleaned$sub == "101",]
+p102 <- DataSetCleaned[DataSetCleaned$sub == "102",]
+p103 <- DataSetCleaned[DataSetCleaned$sub == "103",]
+p104 <- DataSetCleaned[DataSetCleaned$sub == "104",]
+p105 <- DataSetCleaned[DataSetCleaned$sub == "105",]
+p200 <- DataSetCleaned[DataSetCleaned$sub == "200",]
+p201 <- DataSetCleaned[DataSetCleaned$sub == "201",]
+p202 <- DataSetCleaned[DataSetCleaned$sub == "202",]
+p203 <- DataSetCleaned[DataSetCleaned$sub == "203",]
+p204 <- DataSetCleaned[DataSetCleaned$sub == "204",]
+p205 <- DataSetCleaned[DataSetCleaned$sub == "205",]
+p206 <- DataSetCleaned[DataSetCleaned$sub == "206",]
+p207 <- DataSetCleaned[DataSetCleaned$sub == "207",]
+p208 <- DataSetCleaned[DataSetCleaned$sub == "208",]
+p209 <- DataSetCleaned[DataSetCleaned$sub == "209",]
+p210 <- DataSetCleaned[DataSetCleaned$sub == "210",]
+p211 <- DataSetCleaned[DataSetCleaned$sub == "211",]
+subject <- c(100,101,102,103,104,105,200,201,202,203,204,205,206,207,208,209,210,211)
+meanRToverall <- c(mean(p100$RT),mean(p101$RT),mean(p102$RT),mean(p103$RT),mean(p104$RT),mean(p105$RT),mean(p200$RT),mean(p201$RT),mean(p202$RT),mean(p203$RT),mean(p204$RT),mean(p205$RT),mean(p206$RT),mean(p207$RT),mean(p208$RT),mean(p209$RT),mean(p210$RT),mean(p211$RT))
+rttask <- data.frame(subject,meanRToverall)
