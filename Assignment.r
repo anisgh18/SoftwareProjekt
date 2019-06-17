@@ -88,6 +88,7 @@ arrows(plotRTmean,mean(meanRTcon)+SEMmeanRTCon,
        plotRTmean,mean(meanRTcon)-SEMmeanRTCon,
        angle=90, code=3, length =0.05,lwd = 1.5)
 
+
 argnames1 <- c("meanRTdiff")
 plotRTdiff <- barplot(c(mean(meanRTdiff)),names.arg=argnames1,beside=true,cex.names = 0.75, ylab = "RT", border = "black", axes = TRUE,col = rainbow(4),ylim = c(0,15))
 arrows(plotRTdiff,mean(meanRTdiff)+SEMRTdiff,
@@ -251,8 +252,8 @@ meanPcorr_indir <- c(meanPcorrp100,meanPcorrp101,meanPcorrp102,meanPcorrp103,mea
 
 
 
-currentDataSetd <- read.table("om1701_perc_all.dat", header=TRUE)
-DataSetCleanedd <- currentDataSetd[currentDataSetd$key_error=="correct",]
+currentDataSet1 <- read.table("om1701_perc_all.dat", header=TRUE)
+DataSetCleanedd <- currentDataSet1[currentDataSet1$key_error=="correct",]
 DataSetCleanedd <- DataSetCleanedd[DataSetCleanedd$time_error=="Normal",]
 nOfTrialsTotalDirect <- c(length(which(currentDataSet1$sub == "100")),length(which(currentDataSet1$sub == "101")),length(which(currentDataSet1$sub == "102")),length(which(currentDataSet1$sub == "103")),length(which(currentDataSet1$sub == "104")),length(which(currentDataSet1$sub == "105")),length(which(currentDataSet1$sub == "200")),length(which(currentDataSet1$sub == "201")),length(which(currentDataSet1$sub == "202")),length(which(currentDataSet1$sub == "203")),length(which(currentDataSet1$sub == "204")),length(which(currentDataSet1$sub == "205")),length(which(currentDataSet1$sub == "206")),length(which(currentDataSet1$sub == "207")),length(which(currentDataSet1$sub == "208")),length(which(currentDataSet1$sub == "209")),length(which(currentDataSet1$sub == "210")),length(which(currentDataSet1$sub == "211")))
 p100d <- DataSetCleanedd[DataSetCleanedd$sub == "100",]
@@ -429,13 +430,15 @@ arrows(plotmeanPCorr_dir,mean(meanPcorr_dir)+SEMPcorr_dir,
        plotmeanPCorr_dir,mean(meanPcorr_dir)-SEMPcorr_dir,
        angle=90, code=3, length =0.05,lwd = 1.5)
 
+
 argnames3 <- c("meanPcorr_dir VS meanPcorr_indir")
 plotmeanPCorr_dir_indir <- barplot(c(mean(meanPcorr_dir),mean(meanPcorr_indir)),names.arg=argnames3,beside=true,cex.names = 0.75, border = "black", axes = TRUE,col = rainbow(4),ylim = c(0,1))
+argnames4 <- c("meanPcorr_dir")
+plotmeanPCorr_dir_indir <- barplot(c(mean(meanPcorr_dir)),names.arg=argnames4,beside=true,cex.names = 0.75, border = "black", axes = TRUE,col = rainbow(4),ylim = c(0,1))
 
-
-test1 <- t.test(meanRTdiff,mu=0)
+test1 <- t.test(meanRTdiff)
 test2 <- t.test(meanRTcon,meanRTincon)
-
+test3 <- t.test(meanPcorr_dir,meanPcorr_indir,paired=TRUE,conf.level=0.95)
 
 
 indirect_task <- data.frame(subject,nOfTrialsTotal,nOfTrialsNoErrors,meanRToverall,meanRTcon,meanRTincon,meanRTdiff,standardDeviationCon,standardDeviationIncon,standardDeviationDiff,meanPcorr_indir)
